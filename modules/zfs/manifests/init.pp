@@ -1,19 +1,25 @@
-# zfs.pp
 class zfs {
-  include apt, zfs::zpool
+  include apt
   
-  # add ZFS on Linux ppa.  
+  # Add ZFS on Linux ppa.  
   apt::ppa { 'ppa:zfs-native/stable': }
   
-  # install packages
+  # Install packages.
   package { 'ubuntu-zfs':
     ensure  => installed,
     require => Exec["apt-get update"],
   }
   
-  file { 'zpool-mount-point':
+  file { "$zpool_name":
     path    => "$zpool_mount_point",
-    ensure  => 'directory',
+    ensure  => directory,
     require => Package['ubuntu-zfs'],
+  }
+  
+  zpool { "$zpool_name":
+    ensure      => present,
+    raidz       => "$zpool_disks",
+    raid_parity => "$zpool_parity",
+    require     => File["$zpool_name"],
   }
 }

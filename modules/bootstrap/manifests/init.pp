@@ -1,6 +1,6 @@
 class bootstrap {
 
-  # Ensure puppet group exists. (Otherwise, what's the point?)
+  # Silence Puppet and Vagrant annoyance about the puppet group
   group { 'puppet':
     ensure => 'present'
   }

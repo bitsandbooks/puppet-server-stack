@@ -3,6 +3,7 @@ class tools {
   # Base package install list
   $packages = [
     'curl',
+    'git',
     'htop',
     'python-software-properties',
     'software-properties-common',
