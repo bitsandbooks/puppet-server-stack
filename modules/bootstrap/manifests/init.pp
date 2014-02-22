@@ -1,3 +1,5 @@
+# Bootstrap class. This class gets Puppet up and running.
+
 class bootstrap {
 
   # Silence Puppet and Vagrant annoyance about the puppet group

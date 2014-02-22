@@ -12,11 +12,15 @@ node 'ztest1.local' {
   $zpool_name         = 'storage'
   $zpool_parity       = 'raidz2'
   $zpool_mount_point  = "/$zpool_name"
-  $zpool_disks        = "/vdev/vdisk1 /vdev/vdisk2 /vdev/vdisk3 /vdev/vdisk4 /vdev/vdisk5"
+  $zpool_disks        = [ '/vdev/vdisk1', 
+                          '/vdev/vdisk2',
+                          '/vdev/vdisk3',
+                          '/vdev/vdisk4',
+                          '/vdev/vdisk5', ]
   
   include bootstrap
   include tools
-  include zfs 
+  include zfs
 }
 
 node 'zeddemore.local' {
@@ -24,8 +28,11 @@ node 'zeddemore.local' {
   $zpool_name         = 'storage'
   $zpool_parity       = 'raidz2'
   $zpool_mount_point  = "/$zpool_name"
-  $zpool_disks        = "/dev/disk/by-id/ata-WDC_WD10EZEX-00KUWA0_WD-WCC1S5846501 /dev/disk/by-id/ata-WDC_WD10EZEX-00KUWA0_WD-WCC1S5849000 /dev/disk/by-id/ata-WDC_WD10EZEX-00RKKA0_WD-WMC1S6620320 /dev/disk/by-id/ata-WDC_WD10EZEX-00KUWA0_WD-WCC1S5439564 /dev/disk/by-id/ata-WDC_WD10EZEX-00RKKA0_WD-WCC1S5840993"
-  # $zpool_disks        = "/dev/sda /dev/sdb /dev/sdd /dev/sde /dev/sdf"
+  $zpool_disks        = [ '/dev/disk/by-id/ata-WDC_WD10EZEX-00KUWA0_WD-WCC1S5846501', 
+                          '/dev/disk/by-id/ata-WDC_WD10EZEX-00KUWA0_WD-WCC1S5849000', 
+                          '/dev/disk/by-id/ata-WDC_WD10EZEX-00RKKA0_WD-WMC1S6620320', 
+                          '/dev/disk/by-id/ata-WDC_WD10EZEX-00KUWA0_WD-WCC1S5439564', 
+                          '/dev/disk/by-id/ata-WDC_WD10EZEX-00RKKA0_WD-WCC1S5840993', ]
 
   include bootstrap
   include tools

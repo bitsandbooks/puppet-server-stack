@@ -1,7 +1,9 @@
+# ZFS class. This gets ZFS on Linux up and running.
+
 class zfs {
   include apt
   
-  # Add ZFS on Linux ppa.  
+  # Add ZFS on Linux ppa.
   apt::ppa { 'ppa:zfs-native/stable': }
   
   # Install packages.
@@ -10,7 +12,7 @@ class zfs {
     require => Exec["apt-get update"],
   }
   
-  file { "$zpool_name":
+  file { 'zpool_mount_point':
     path    => "$zpool_mount_point",
     ensure  => directory,
     require => Package['ubuntu-zfs'],
@@ -18,8 +20,8 @@ class zfs {
   
   zpool { "$zpool_name":
     ensure      => present,
-    raidz       => "$zpool_disks",
+    raidz       => $zpool_disks,
     raid_parity => "$zpool_parity",
-    require     => File["$zpool_name"],
+    require     => File['zpool_mount_point'],
   }
 }
