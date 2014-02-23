@@ -34,6 +34,9 @@ node 'zeddemore.local' {
                           '/dev/disk/by-id/ata-WDC_WD10EZEX-00KUWA0_WD-WCC1S5439564', 
                           '/dev/disk/by-id/ata-WDC_WD10EZEX-00RKKA0_WD-WCC1S5840993', ]
 
+  # Define ZFS variables.
+  $zfs_datasets = [ 'backups', 'media', 'home', ]
+
   include bootstrap
   include tools
   include zfs
