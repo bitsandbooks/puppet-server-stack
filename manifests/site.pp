@@ -20,7 +20,8 @@ node 'ztest1.local' {
   
   include bootstrap
   include tools
-  include zfs
+  # include zfs
+  include timemachine
 }
 
 node 'zeddemore.local' {
@@ -37,7 +38,13 @@ node 'zeddemore.local' {
   # Define ZFS variables.
   $zfs_datasets = [ 'backups', 'media', 'home', ]
 
+  $admin_group    = 'admins'
+  $backup_user    = 'backupuser'
+  $backup_folder  = "$zpool_mount_point/backups/timemachine"
+
   include bootstrap
   include tools
-  include zfs
+  # include zfs
+  include timemachine
+
 }

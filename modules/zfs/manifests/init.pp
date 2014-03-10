@@ -8,7 +8,7 @@ class zfs {
   # Install packages.
   package { 'ubuntu-zfs':
     ensure  => installed,
-    require => Exec["apt-get update"],
+    require => Exec["apt-get update"] -> Apt::Ppa['ppa:zfs-native/stable'],
   }
   
   # Set zpool mount point.
@@ -35,7 +35,7 @@ class zfs {
   # Create datasets withing the zpool.
   zfs { $zfs_datasets:
     ensure  => present,
-    require => Zpool["$zpool_name"],
+    require => Zfs["$zpool_name"],
   }
 
 }
