@@ -9,13 +9,12 @@ class timemachine {
     gid         => "$admin_group",
     shell       => '/sbin/nologin',
     managehome  => false,
-    require     => Group["$admin_group"],
   }
 
   # Netatalk (AppleTalk)
   package { 'netatalk': 
     ensure  => installed, 
-    require => User["$backup_user"], 
+    require => User["$backup_user"],
   }
 
   service { 'netatalk': 
@@ -33,7 +32,7 @@ class timemachine {
   # Avahi (a.k.a. Zeroconf, Bonjour)
   package { 'avahi-daemon': 
     ensure => installed, 
-    require => User["$backup_user"], 
+    require => User["$backup_user"],
   }
 
   service { 'avahi-daemon': 
@@ -43,7 +42,7 @@ class timemachine {
 
   file { '/etc/avahi/services/afpd.service':
     ensure  => present,
-    content => file('puppet:///modules/timemachine/afpd.service'),
+    content => file('/etc/puppet/modules/timemachine/files/afpd.service'),
     require => Package['avahi-daemon'],
     notify  => Service['avahi-daemon'],
   }

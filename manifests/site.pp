@@ -18,6 +18,10 @@ node 'ztest1.local' {
                           '/vdev/vdisk4',
                           '/vdev/vdisk5', ]
   
+  $admin_group    = 'admins'
+  $backup_user    = 'backupuser'
+  $backup_folder  = "$zpool_mount_point/backups/timemachine"
+
   include bootstrap
   include tools
   # include zfs
